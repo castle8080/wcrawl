@@ -6,3 +6,6 @@ The default test system uses MongoDB and RabbitMQ. Both of which need to be inst
 
 ## Testing
 I am trying out the idea of writing tests using Jupyter. Run the script run-jupyter.bat and then run the test notebooks under test. I would like to look into writing jupyter inline magic which gives test assertion and reporting support.
+
+## Configuration
+The test code reads configuration from var/conf which is ignored by git, since the configuration could have secrets. See conf/test-sample.json. Fill in the appropriate values and place in var/conf.

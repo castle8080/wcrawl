@@ -1,0 +1,8 @@
+{
+    "mongodb_credentials": {
+        "host": "localhost",
+        "username": "<ADD_THIS>",
+        "password": "<ADD_THIS>"
+    },
+    "rabbitmq_url": "<ADD_THIS>"
+}
