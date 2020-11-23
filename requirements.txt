@@ -1,0 +1,8 @@
+requests
+pandas
+numpy
+jupyter
+jupyterlab
+beautifulsoup4
+pika
+pymongo
