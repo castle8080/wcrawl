@@ -1,7 +1,6 @@
 """
 Adds support for queueing using RabbitMQ.
 """
-from ro
 from rook.common.container import singleton, Provider
 from rook.common.queue.rabbitmq_queue import RabbitMQQueueReceiver, RabbitMQQueueSender
 
