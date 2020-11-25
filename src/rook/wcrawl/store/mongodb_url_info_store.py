@@ -1,11 +1,12 @@
-import pymongo
+from pymongo import MongoClient
 from .url_info_store import URLInfoStore
 
 class MongoDBURLInfoStore(URLInfoStore):
     
-    def __init__(self, mongodb_client):
+    def __init__(self, mongodb_client: MongoClient, db_name: str):
         self.mongodb_client = mongodb_client
-        self.db = self.mongodb_client.wcrawl
+        self.db_name = db_name
+        self.db = self.mongodb_client[self.db_name]
         self.urls = self.db.urls
         
     def save(self, url, content_type, retrieved, exists=True):
