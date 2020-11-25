@@ -3,7 +3,7 @@ Adds support for URL info using MongoDB.
 """
 from rook.common.container import singleton, Provider
 from pymongo import MongoClient
-from rook.wcrawl.url.mongodb_url_download_info import MongoDBURLDownloadInfo
+from rook.wcrawl.store.mongodb_url_info_store import MongoDBURLInfoStore
 
 class MongoDBProvider(Provider):
 
@@ -12,5 +12,5 @@ class MongoDBProvider(Provider):
         return MongoClient(**self.mongodb_credentials())
 
     @singleton
-    def url_download_info(self):
-        return MongoDBURLDownloadInfo(self.mongodb_client())
+    def url_info_store(self):
+        return MongoDBURLInfoStore(self.mongodb_client())

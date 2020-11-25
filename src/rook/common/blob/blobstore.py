@@ -12,3 +12,7 @@ class BlobStore(ABC):
     @abstractmethod
     def read(self, file_id, stream_callback):
         pass
+
+    @abstractmethod
+    def delete(self, file_id):
+        pass

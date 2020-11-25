@@ -9,4 +9,8 @@ class EventPublisher:
         self.queue_sender = queue_sender
 
     def send_url_download(self, url):
+        print(f"URL download request: {url}")
         self.queue_sender.send(events.URL_DOWNLOAD, { 'url': url })
+
+    def send_url_downloaded(self, url):
+        self.queue_sender.send(events.URL_DOWNLOADED, { 'url': url })
