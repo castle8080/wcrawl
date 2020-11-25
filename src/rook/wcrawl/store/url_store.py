@@ -23,13 +23,18 @@ class BlobInfoURLStore(URLStore):
         url_info = self.url_info_store.get(url)
         if url_info is None:
             return None
-        blob_id = self._get_id(url_info['url'])
-        return self.blob_store.read(blob_id, lambda fh: reader(url_info, fh))
+        if url_info.get('exists', True):
+            blob_id = self._get_id(url_info['url'])
+            return self.blob_store.read(blob_id, lambda fh: reader(url_info, fh))
+        else:
+            return reader(url_info, None)
         
     def save(self, url, content_type, retrieval_time, writer):
         blob_id = self._get_id(url)
-        self.blob_store.write(blob_id, writer)
-        self.url_info_store.save(url, content_type, retrieval_time)
+        exists = writer is not None
+        if exists:
+            self.blob_store.write(blob_id, writer)
+        self.url_info_store.save(url, content_type, retrieval_time, exists=exists)
         
     def _get_id(self, url):
         h = hashlib.sha256()

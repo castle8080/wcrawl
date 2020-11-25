@@ -8,14 +8,16 @@ class MongoDBURLInfoStore(URLInfoStore):
         self.db = self.mongodb_client.wcrawl
         self.urls = self.db.urls
         
-    def save(self, url, content_type, retrieved):
-        self.urls.update(
-            { '_id': url },    
-            {
-                '_id': url,
-                'content_type': content_type,
-                'retrieved': retrieved
-            }, upsert=True)
+    def save(self, url, content_type, retrieved, exists=True):
+        payload = {
+            '_id': url,
+            'content_type': content_type,
+            'retrieved': retrieved
+        }
+        if not exists:
+            payload['exists'] = False
+
+        self.urls.update({ '_id': url }, payload, upsert=True)
 
     def get(self, url):
         with self.urls.find({ '_id': url }) as cur:
