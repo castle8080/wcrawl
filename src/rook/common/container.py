@@ -16,11 +16,14 @@ import json
 
 def singleton(method):
     """Add this annotation to methods where the instance should be cached."""
-    cache = []
+    method_name = method.__name__
     def execute(self):
-        if len(cache) == 0:
-            cache.append(method(self))
-        return cache[0]
+        if not hasattr(self, '_singletons'):
+            self._singletons = {}
+        
+        if method_name not in self._singletons:
+            self._singletons[method_name] = method(self)
+        return self._singletons[method_name]
     return execute
 
 class Provider(ABC):
