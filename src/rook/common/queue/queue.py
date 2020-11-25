@@ -48,11 +48,3 @@ class ListQueueSender(QueueSender):
             self.queues[queue_name].append(json.dumps(obj))
         callback(on_send)
 
-class MultiThreadedQueueReceiver:
-
-    def __init__(self, receiver, handler_specs):
-        self.receiver = receiver
-        self.handler_specs = handler_specs
-
-    def start(self):
-        pass
