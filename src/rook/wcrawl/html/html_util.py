@@ -1,6 +1,11 @@
 import urllib
 from bs4 import BeautifulSoup
 
+def get_robots_url(url):
+    url_p = urllib.parse.urlparse(url)
+    url_robots = url_p.scheme + "://" + url_p.netloc + "/robots.txt"
+    return url_robots
+
 def is_valid_href(href):
     if href is None or href == '':
         return False

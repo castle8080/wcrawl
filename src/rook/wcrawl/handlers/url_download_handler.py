@@ -39,7 +39,7 @@ class URLDownloadHandler:
 
     def _process_not_found(self, request, resp):
         retrieval_time = self.time_provider()
-        self.url_store.save(request['url'], '', retrieval_time, write_resp)
+        self.url_store.save(request['url'], '', retrieval_time, None)
         
     def _process_download(self, request, resp):
         url = request['url']

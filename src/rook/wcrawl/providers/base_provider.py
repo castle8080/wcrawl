@@ -6,6 +6,7 @@ from rook.wcrawl.event.event_publisher import EventPublisher
 from rook.wcrawl.handlers.url_download_handler import URLDownloadHandler
 from rook.wcrawl.handlers.url_downloaded_handler import URLDownloadedHandler
 from rook.wcrawl.store.url_store import BlobInfoURLStore
+from rook.wcrawl.store.robot_store import RobotStore
 from rook.common.queue.queue_receiver_manager import QueueReceiverManager
 
 class BaseProvider(Provider):
@@ -13,6 +14,10 @@ class BaseProvider(Provider):
     @singleton
     def event_publisher(self):
         return EventPublisher(self.queue_sender())
+
+    @singleton
+    def robot_store(self):
+        return RobotStore(self.url_store())
 
     @singleton
     def url_download_handler(self):
